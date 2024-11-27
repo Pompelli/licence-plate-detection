@@ -74,10 +74,10 @@ for image_name in os.listdir(pic_folder):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
         # Wende eine bilaterale Filterung an, um Rauschen zu reduzieren
-        bfilter = cv2.bilateralFilter(gray, 11, 17, 17)
+        bfilter = cv2.bilateralFilter(gray, 11, 20, 20)
 
         # Führe eine Kantenerkennung durch (Canny-Edge-Detection)
-        edged = cv2.Canny(bfilter, 50, 150)
+        edged = cv2.Canny(bfilter, 100, 150)
 
 
         # Finde die Konturen im Bild

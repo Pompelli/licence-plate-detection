@@ -18,13 +18,14 @@ plt.show()
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 # Apply noise reduction
-bfilter = cv2.bilateralFilter(gray, 11, 17, 17)
+bfilter = cv2.bilateralFilter(gray, 11, 20, 20)
 plt.imshow(bfilter, cmap='gray')
 plt.title('Noise Reduced Image')
 plt.show()
 
+
 # Edge detection
-edged = cv2.Canny(bfilter, 50, 150)
+edged = cv2.Canny(bfilter, 100, 150)
 plt.imshow(edged, cmap='gray')
 plt.title('Edge Detection')
 plt.show()
