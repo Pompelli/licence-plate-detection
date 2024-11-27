@@ -24,7 +24,7 @@ plt.title('Noise Reduced Image')
 plt.show()
 
 # Edge detection
-edged = cv2.Canny(bfilter, 30, 200)
+edged = cv2.Canny(bfilter, 50, 150)
 plt.imshow(edged, cmap='gray')
 plt.title('Edge Detection')
 plt.show()

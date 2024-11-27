@@ -80,7 +80,8 @@ for image_name in os.listdir(pic_folder):
         bfilter = cv2.bilateralFilter(gray, 11, 17, 17)
 
         # Führe eine Kantenerkennung durch (Canny-Edge-Detection)
-        edged = cv2.Canny(bfilter, 30, 200)
+        edged = cv2.Canny(bfilter, 50, 150)
+
 
         # Finde die Konturen im Bild
         keypoints = cv2.findContours(edged.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
