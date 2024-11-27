@@ -4,7 +4,7 @@ import numpy as np
 import imutils
 
 # Load the image
-img = cv2.imread("Example_pics/pic/f83d18919353c483.jpg")
+img = cv2.imread("Example_pics/pic/9a4fe6361597f264.jpg")
 if img is None:
     print("Error: Image not found. Check the file path.")
     exit()
