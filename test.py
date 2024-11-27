@@ -89,12 +89,15 @@ for image_name in os.listdir(pic_folder):
         contours = sorted(contours, key=cv2.contourArea, reverse=True)[:10]
 
         # Durchlaufe alle Konturen und versuche, eine mit 4 Punkten (Rechteck) zu finden
-        location = None
+        # Filtering by area and aspect ratio
+        min_area = 1000  # You can tweak this threshold
         for contour in contours:
-            approx = cv2.approxPolyDP(contour, 0.02 * cv2.arcLength(contour, True), True)
-            if len(approx) == 4:  # Wenn die Kontur 4 Ecken hat (ein Rechteck)
-                location = approx
-                break
+            if cv2.contourArea(contour) > min_area:
+                approx = cv2.approxPolyDP(contour, 0.04 * cv2.arcLength(contour, True), True)
+                if len(approx) == 4:
+                    location = approx
+                    break
+
 
         if location is None:
             print(f"Error: No contour with 4 vertices found in {image_name}. Skipping...")
