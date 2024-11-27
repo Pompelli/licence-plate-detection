@@ -24,33 +24,30 @@ def read_label(file_path):
     return labels_and_boxes  # Gibt eine Liste der Bounding-Boxen zurück
 
 # Function to compare bounding boxes (from the image and label)
-def compare_bounding_boxes(image_bbox, label_bbox, image_shape):
+def compare_bounding_boxes(image_bbox, label_bbox, image_shape, tolerance=0.1):
     """
-    Vergleicht die Bounding-Box des Bildes (aus den erkannten Konturen) mit den
-    Bounding-Box-Koordinaten aus der Label-Datei und überprüft, ob eine Übereinstimmung
-    vorliegt.
+    Vergleicht die Bounding-Box mit einer Toleranz, um kleine Unterschiede zu erlauben.
     """
-    # Extrahiere die Bounding-Box-Koordinaten des Bildes (aus den Konturen)
     x, y, w, h = image_bbox
+    height, width = image_shape[:2]
     
-    # Extrahiere Höhe und Breite des Bildes (ignoriere die Farbkanäle)
-    height, width = image_shape[:2]  # Nur Höhe und Breite verwenden, Kanäle ignorieren
-    
-    # Konvertiere die normalisierten Label-Bounding-Box-Koordinaten in Pixelwerte
     label_x_center = int(label_bbox[1] * width)
     label_y_center = int(label_bbox[2] * height)
     label_width = int(label_bbox[3] * width)
     label_height = int(label_bbox[4] * height)
     
-    # Berechne die Ecken der Label-Bounding-Box
     label_x1 = label_x_center - label_width // 2
     label_y1 = label_y_center - label_height // 2
     label_x2 = label_x_center + label_width // 2
     label_y2 = label_y_center + label_height // 2
+    
+    # Berechne die Toleranz für die Bounding-Box-Übereinstimmung
+    x_tolerance = int(w * tolerance)
+    y_tolerance = int(h * tolerance)
+    
+    return (label_x1 - x_tolerance <= x + w <= label_x2 + x_tolerance or label_x1 - x_tolerance <= x <= label_x2 + x_tolerance) and \
+           (label_y1 - y_tolerance <= y + h <= label_y2 + y_tolerance or label_y1 - y_tolerance <= y <= label_y2 + y_tolerance)
 
-    # Überprüfe, ob die Bild-Bounding-Box mit der Label-Bounding-Box überlappt
-    return (label_x1 <= x + w <= label_x2 or label_x1 <= x <= label_x2) and \
-           (label_y1 <= y + h <= label_y2 or label_y1 <= y <= label_y2)
 
 # Haupt-Skript zur Verarbeitung aller Bilder im "pic"-Ordner
 pic_folder = "Example_pics/pic"  # Ordner, in dem sich die Bilder befinden
