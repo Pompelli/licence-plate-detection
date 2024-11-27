@@ -87,6 +87,8 @@ for image_name in os.listdir(pic_folder):
 
         # Durchlaufe alle Konturen und versuche, eine mit 4 Punkten (Rechteck) zu finden
         # Filtering by area and aspect ratio
+        location = None
+
         min_area = 1000  # You can tweak this threshold
         for contour in contours:
             if cv2.contourArea(contour) > min_area:
