@@ -51,7 +51,7 @@ contours = imutils.grab_contours(keypoints)
 contours = sorted(contours, key=cv2.contourArea, reverse=True)[:10]
 
 # Loop through contours to find a 4-point contour
-min_area = 900  # You can tweak this threshold
+min_area = 900  
 location = None
 for contour in contours:
     if cv2.contourArea(contour) > min_area:
