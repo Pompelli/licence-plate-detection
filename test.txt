@@ -1,3 +1,0 @@
-Total images processed: 381
-Correct matches: 109
-Accuracy: 28.61%
