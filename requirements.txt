@@ -1,5 +1,7 @@
-opencv-python==4.7.0.72
-matplotlib==3.7.1
-numpy==1.24.3
-imutils==0.5.4
-easyocr==1.7.0
+opencv-python>=4.5.0
+matplotlib>=3.0.0
+imutils>=0.5.4
+easyocr>=1.6.2
+numpy>=1.19.0
+PyQt5
+Pillow==9.5.0

@@ -3,8 +3,18 @@ from matplotlib import pyplot as plt
 import numpy as np
 import imutils
 import easyocr
+import warnings
 
-               
+# supress warnings
+warnings.filterwarnings("ignore", category=UserWarning, module='easyocr')
+warnings.filterwarnings("ignore", category=FutureWarning)  
+warnings.filterwarnings("ignore", category=UserWarning, module="torch")
+
+
+
+
+
+
 
 # Load the image
 img = cv2.imread("archive/images/Cars0.png")
@@ -42,7 +52,6 @@ plt.show()
 
 # Define a kernel for (dilation/erosion)
 kernel = np.ones((2, 2), np.uint8)  #2 x 2 kernel
-   
 # Apply dilation to close small gaps
 dialated = cv2.dilate(threshold_img, kernel, iterations=1)  
 
@@ -124,8 +133,8 @@ result = reader.readtext(license_plate_resized)
 
 # Display OCR results and annotate detected text
 for detection in result:
-    text = detection[1]  # Extract detected text
-    print(f"Detected text: {text}")  
+    text = detection[1].strip()  # Extract detected text and strip unwanted spaces
+    print(f"Detected text: {text}")  # Print detected text
     # Draw a rectangle around the detected text
     top_left = tuple(detection[0][0])
     bottom_right = tuple(detection[0][2])
@@ -137,5 +146,5 @@ for detection in result:
 
 # Display the result with the detected text
 plt.imshow(cv2.cvtColor(license_plate_resized, cv2.COLOR_BGR2RGB))
-plt.title('Detected Symbols (License Plate)')
+plt.title('License Plate')
 plt.show()
