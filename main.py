@@ -4,12 +4,10 @@ import numpy as np
 import imutils
 import easyocr
 
-# Define a kernel for (dilation/erosion)
-kernel = np.ones((2, 2), np.uint8)  
-                 #2 x 2 kernel 
+               
 
 # Load the image
-img = cv2.imread("archive/images/Cars311.png")
+img = cv2.imread("archive/images/Cars0.png")
 if img is None:  # Check if the image was loaded successfully
     print("Error: Image not found. Check the file path.")
     exit()
@@ -42,6 +40,9 @@ plt.imshow(threshold_img, cmap='gray')
 plt.title('Enhanced Image with Thresholding')  
 plt.show()
 
+# Define a kernel for (dilation/erosion)
+kernel = np.ones((2, 2), np.uint8)  #2 x 2 kernel
+   
 # Apply dilation to close small gaps
 dialated = cv2.dilate(threshold_img, kernel, iterations=1)  
 
