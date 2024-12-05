@@ -12,10 +12,6 @@ warnings.filterwarnings("ignore", category=UserWarning, module="torch")
 
 
 
-
-
-
-
 # Load the image
 img = cv2.imread("archive/images/Cars0.png")
 if img is None:  # Check if the image was loaded successfully
@@ -53,14 +49,14 @@ plt.show()
 # Define a kernel for (dilation/erosion)
 kernel = np.ones((2, 2), np.uint8)  #2 x 2 kernel
 # Apply dilation to close small gaps
-dialated = cv2.dilate(threshold_img, kernel, iterations=1)  
+eroded = cv2.erode(threshold_img, kernel, iterations=1)  
 
-plt.imshow(dialated, cmap='gray')
-plt.title('Dilated Image')
+plt.imshow(eroded, cmap='gray')
+plt.title('Eroded Image')
 plt.show()
 
 # Perform edge detection using the Canny algorithm
-edged = cv2.Canny(dialated, 100, 150)  
+edged = cv2.Canny(eroded, 100, 150)  
 # - Thresholds 100 and 150 control sensitivity
 
 # Further dilation to enhance the edges
